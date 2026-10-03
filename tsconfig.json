@@ -1,0 +1,12 @@
+{
+    "compilerOptions": {
+        "target": "esnext", // versão do typescript mais recente
+        "module": "nodenext", // tipo de exportação
+        "moduleResolution": "nodenext",
+        "strict": true, // acusa qualquer erro que haja no código
+        "erasableSyntaxOnly": true, // deixa escrever apenas coisas que podem ser traduzidas para JS
+        "allowImportingTsExtensions": true, // habilita a importação de modulos TS
+        "noEmit": true, // desabilita a criação de um arquivo js correspondente ao ts
+        "types": ["node"]
+    }
+}
