@@ -1,4 +1,6 @@
-import { createServer } from 'node:http';
+import express from 'express'
+
+const app = express() // express retorna um objeto
 
 type InvoiceStatus = 'pending' | 'paid';
 
@@ -41,29 +43,19 @@ const invoices: Invoice[] = [{
     }
 }];
 
-createServer(function (request, response) {
-    if (request.url === '/api/health') {
-        response.writeHead(
-            200,
-            { 'content-type': 'application/json' }
-        );
-        response.end(JSON.stringify({ status: 'ok' })); // corpo da response (end)
-        return;
-    }
+app.get('/api/health', (request, response) => {
+    response.status(200).json({ status: 'ok' })
+}); // capture a requisição GET no endpoint específico e executa uma expressão de função (arrow function)
 
-    if (request.url === '/api/invoices') {
-        response.writeHead(
-            200,
-            { 'content-type': 'application/json' }
-        );
-        response.end(JSON.stringify(invoices));
-        return;
-    }
+app.get('/api/invoices', (request, response) => {
+    response.status(200).json(invoices);
+});
 
-    response.writeHead(
-        404,
-        { 'content-type': 'application/json' }
-    )
-    response.end(JSON.stringify({ message: 'Recurso não encontrado.' }))
+app.use((request, response) => {
+    response.status(404).json({ error: { 
+        status: 404,
+        message: 'Recurso não encontrado.' 
+    } })
+});
 
-}).listen(3000); // listen disponibiliza uma porta na máquina
+app.listen(3000);
