@@ -23,19 +23,30 @@ const invoices: Invoice[] = [{
     id: 1,
     amount: 125000,
     status: 'pending',
-    issueDate: '01-10-2026',
-    dueDate: '03-11-2026',
+    issueDate: '2026-10-01',
+    dueDate: '2026-11-03',
     customer: {
         id: 7,
         name: 'Construtora Meridiano',
-        email: 'contato@meridiano.com'
+        email: 'contato@meridiano.com.br'
     }
 }, {
     id: 2,
     amount: 350000,
     status: 'paid',
-    issueDate: '02-10-2026',
-    dueDate: '05-11-2026',
+    issueDate: '2026-10-02',
+    dueDate: '2026-11-05',
+    customer: {
+        id: 7,
+        name: 'Construtora Meridiano',
+        email: 'grafica@nova.com.br'
+    }
+}, {
+    id: 3,
+    amount: 183000,
+    status: 'pending',
+    issueDate: '2026-10-05',
+    dueDate: '2026-11-08',
     customer: {
         id: 7,
         name: 'Construtora Meridiano',
@@ -64,7 +75,6 @@ app.get('/api/invoices/:id', (request, response) => {
     response.status(200).json(invoice);
     
 });
-
 
 app.use((request, response) => {
     response.status(404).json({ error: { 
