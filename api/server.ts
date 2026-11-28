@@ -10,6 +10,8 @@ app.get('/api/health', (_request, response) => {
 
 app.use('/api/invoices', invoiceRouter); // middle - intermediario que captura um roteamento
 
+app.use(express.static('../web/dist')); // permite a disponibilidade de algum recurso estático
+
 app.use((_request, response) => {
    response.status(404).json({
       error: {
@@ -19,4 +21,4 @@ app.use((_request, response) => {
    });
 });
 
-app.listen(3000);
+app.listen(process.env.PORT); // acessa a variável de ambiente criada em .env
